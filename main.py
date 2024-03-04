@@ -4,17 +4,20 @@ connection = sqlite3.connect("database.db")
 
 connection.execute('''CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name TEXT NOT NULL,
-    last_name TEXT NULL,
-    email TEXT NULL,
-    phone TEXT NULL
-)
-''')
+    userid INTEGER NOT NULL,
+    fullname VARCHAR(255),
+    email VARCHAR(50) UNIQUE
+)''')
+
+try:
+    connection.execute('''INSERT INTO users (fullname,userid,email)
+VALUES ("Diyorbek Torabekov", 2008,"DiyorbekTorabekov@gmail.com")''')
+    print("Successfully created")
+except:
+    print("Error")
 
 
 
-connection.execute('''INSERT INTO users (first_name, last_name, email,phone)
-VALUES ("Diyorbek", "Torabekov", "Diyorbek@gmail.com", "0712345678")''')
 
 connection.commit()
 connection.close()
